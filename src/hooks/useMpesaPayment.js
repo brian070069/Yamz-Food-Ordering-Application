@@ -64,7 +64,7 @@ export const useMpesaPayment = () => {
       );
       console.log(stkPushData);
       setIsProcessingPayment(false);
-      if (stkPushData?.response?.result === "0") {
+      if (stkPushData?.response?.result_code === "0") {
         setIsPaymentSuccesful(true);
         localStorage.setItem("orderedId", stkPushData?.order_id);
         dispatch({ type: ACTION.CLEARCART });
