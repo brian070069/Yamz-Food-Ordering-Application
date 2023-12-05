@@ -19,7 +19,7 @@ const ReadyToPay = ({ data }) => {
     validationSchema: phoneNumberValidationSchema,
     onSubmit: (values) => {
       let phoneNumber = values.phoneNumber.replace(/^(0|\+254)/, "254");
-      console.log(phoneNumber);
+
       handleMpesaPayment(phoneNumber);
     },
   });

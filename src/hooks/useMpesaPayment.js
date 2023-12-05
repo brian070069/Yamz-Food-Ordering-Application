@@ -62,21 +62,18 @@ export const useMpesaPayment = () => {
         phone_number,
         "phone_number"
       );
-
+      console.log(stkPushData);
       setIsProcessingPayment(false);
-      if (stkPushData?.response?.status === true) {
+      if (stkPushData?.response?.result === "0") {
         setIsPaymentSuccesful(true);
-        console.log(stkPushData.order_id);
         localStorage.setItem("orderedId", stkPushData?.order_id);
         dispatch({ type: ACTION.CLEARCART });
-        return;
       } else {
         setIsPaymentFailed(true);
         setPaymentErrorMessages("Payment Failed");
         dispatch({ type: ACTION.CLEARCART });
       }
     } catch (err) {
-      console.log(err);
       setServerErrors(true);
       setIsProcessingPayment(false);
       setIsPaymentFailed(true);
@@ -89,6 +86,9 @@ export const useMpesaPayment = () => {
       } else if (err.result.status === 401) {
         localStorage.clear();
         navigate("/login", { replace: true });
+      } else if (err.result.status === 503) {
+        console.log(err);
+        return;
       } else {
         setServerErrorMessages("an error occured please try again");
       }

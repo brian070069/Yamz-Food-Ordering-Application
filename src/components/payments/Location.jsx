@@ -30,7 +30,7 @@ const Location = ({ data }) => {
             },
           }
         );
-        console.log(response.data);
+        localStorage.removeItem("orderedId", stkPushData?.order_id);
         setLoading(false);
         handleHidePaymentArea();
       } catch (err) {
