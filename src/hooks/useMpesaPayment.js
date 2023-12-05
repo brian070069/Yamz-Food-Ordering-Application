@@ -73,15 +73,16 @@ export const useMpesaPayment = () => {
       } else {
         setIsPaymentFailed(true);
         setPaymentErrorMessages("Payment Failed");
+        dispatch({ type: ACTION.CLEARCART });
       }
     } catch (err) {
       console.log(error);
       setServerErrors(true);
       setIsProcessingPayment(false);
       setIsPaymentFailed(true);
+      dispatch({ type: ACTION.CLEARCART });
       if (!err.response) {
         setServerErrorMessages("failed to contact the server please try again");
-        dispatch({ type: ACTION.CLEARCART });
       } else if (err.result.status === 400) {
         setServerErrorMessages("request failed please try again");
         dispatch({ type: ACTION.CLEARCART });
@@ -89,7 +90,6 @@ export const useMpesaPayment = () => {
         localStorage.clear();
         navigate("/login", { replace: true });
       } else {
-        dispatch({ type: ACTION.CLEARCART });
         setServerErrorMessages("an error occured please try again");
       }
     }
