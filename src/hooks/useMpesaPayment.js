@@ -7,6 +7,7 @@ import { mpesaBaseUrl } from "../services/BaseUrls";
 import { getToken } from "../libs/getToken";
 
 const sendStkPushUrl = mpesaBaseUrl + "send/";
+const checkTransactionStatusUrl = mpesaBaseUrl + "check-online/";
 
 export const useMpesaPayment = () => {
   const { mpesaPostRequest } = useMpesaPostService();
@@ -67,7 +68,7 @@ export const useMpesaPayment = () => {
       await new Promise((resolve) =>
         setTimeout(() => {
           resolve();
-        }, 15000)
+        }, 22000)
       );
       // check  transaction status
       if (!transaction_id) {
@@ -84,13 +85,15 @@ export const useMpesaPayment = () => {
         "transaction_id"
       );
       setIsProcessingPayment(false);
+
       //sucessfull transaction
-      if (transactionStatusData.status === true) {
+      if (transactionStatusData.response.status === true) {
         setIsPaymentSuccesful(true);
+        localStorage.setItem("orderedId", transactionStatusData.order_id);
         dispatch({ type: ACTION.CLEARCART });
       } else {
         // transaction not sucessful
-        setPaymentErrorMessages(transactionStatusData.message);
+        setPaymentErrorMessages(transactionStatusData.response.message);
         setIsPaymentSuccesful(false);
         setIsPaymentFailed(true);
       }
@@ -98,7 +101,6 @@ export const useMpesaPayment = () => {
       setServerErrors(true);
       setIsProcessingPayment(false);
       setIsPaymentFailed(true);
-      dispatch({ type: ACTION.CLEARCART });
       if (!err.response) {
         setServerErrorMessages("failed to contact the server please try again");
       } else if (err.result.status === 400) {

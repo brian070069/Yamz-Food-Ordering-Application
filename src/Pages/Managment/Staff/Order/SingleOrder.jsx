@@ -23,7 +23,6 @@ const SingleOrder = () => {
       const itemToDisplay = fetchedItems.find((item) => {
         return item.order_id === id;
       });
-      console.log(itemToDisplay);
       setOrder(itemToDisplay);
       return;
     }
