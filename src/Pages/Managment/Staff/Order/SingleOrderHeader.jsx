@@ -80,12 +80,17 @@ const SingleOrderHeader = ({ order, updateDeliveringStatus }) => {
             <span className="before">Amount:</span>
             <span className="order__TotalPrice">sh {total}</span>
           </div>
-          {trans_id && (
+          {
             <div className="row">
-              <span className="before">TransId:</span>
-              <span className="order__TotalPrice">{trans_id}</span>
+              <span className="before">Location:</span>
+              <span
+                className="order__TotalPrice"
+                style={{ textTransform: "capitalize" }}
+              >
+                {order.location}
+              </span>
             </div>
-          )}
+          }
         </div>
         <div className="delivery_statusContainer row">
           <div>
