@@ -62,16 +62,37 @@ export const useMpesaPayment = () => {
         phone_number,
         "phone_number"
       );
-      console.log(stkPushData);
+      const transaction_id = stkPushData?.transaction_id;
+      //delay transaction status
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve();
+        }, 15000)
+      );
+      // check  transaction status
+      if (!transaction_id) {
+        setIsProcessingPayment(false);
+        setIsPaymentFailed(true);
+        setPaymentErrorMessages("an error occured please try again");
+        return;
+      }
+
+      //transaction id true
+      const transactionStatusData = await mpesaPostRequest(
+        checkTransactionStatusUrl,
+        transaction_id,
+        "transaction_id"
+      );
       setIsProcessingPayment(false);
-      if (stkPushData?.response?.result_code === "0") {
+      //sucessfull transaction
+      if (transactionStatusData.status === true) {
         setIsPaymentSuccesful(true);
-        localStorage.setItem("orderedId", stkPushData?.order_id);
         dispatch({ type: ACTION.CLEARCART });
       } else {
+        // transaction not sucessful
+        setPaymentErrorMessages(transactionStatusData.message);
+        setIsPaymentSuccesful(false);
         setIsPaymentFailed(true);
-        setPaymentErrorMessages("Payment Failed");
-        dispatch({ type: ACTION.CLEARCART });
       }
     } catch (err) {
       setServerErrors(true);
