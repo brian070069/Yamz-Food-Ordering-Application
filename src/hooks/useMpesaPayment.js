@@ -76,7 +76,7 @@ export const useMpesaPayment = () => {
         dispatch({ type: ACTION.CLEARCART });
       }
     } catch (err) {
-      console.log(error);
+      console.log(err);
       setServerErrors(true);
       setIsProcessingPayment(false);
       setIsPaymentFailed(true);
