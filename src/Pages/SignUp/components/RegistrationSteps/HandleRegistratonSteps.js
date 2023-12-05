@@ -11,11 +11,16 @@ export const useRegisterFirstStep = () => {
     useContext(RegisterContext);
 
   const handleRegister = async (values) => {
+    let phoneNumber = values.phoneNumber;
+
+    if (phoneNumber.startsWith("0")) {
+      phoneNumber = "+254" + phoneNumber.slice(1);
+    }
     setIsLoading(true);
     try {
       await axios.post(
         userUrl + "check_phone_number/",
-        { phone_number: values.phoneNumber },
+        { phone_number: phoneNumber },
         {
           headers: { "content-type": "application/json" },
         }

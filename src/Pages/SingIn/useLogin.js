@@ -14,8 +14,16 @@ export const useLogin = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (values) => {
+    let phoneNumber = values.phoneNumber;
+
+    if (phoneNumber.startsWith("0")) {
+      phoneNumber = "+254" + phoneNumber.slice(1);
+    }
+
+    console.log(phoneNumber);
+
     const userInfo = {
-      phone_number: values.phoneNumber,
+      phone_number: phoneNumber,
       password: values.password,
     };
 
