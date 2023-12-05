@@ -41,6 +41,7 @@ export const useFetch = (url, hasHeaders) => {
       if (axios.isCancel(error)) {
         return;
       }
+      console.log(error);
 
       setIsLoading(false);
       if (!error.response) {
