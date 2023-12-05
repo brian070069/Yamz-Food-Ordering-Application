@@ -22,10 +22,11 @@ const Header = () => {
   return (
     <section className="simpleHeader row ">
       <Link to="/">
-        <img
-          src="https://ik.imagekit.io/kzmqi6dbk/logo2_6VhjzQesV?updatedAt=1689687652550"
+        {/* <img
+          src=
           alt=""
-        />
+        /> */}
+        <h1>sansiroo</h1>
       </Link>
       <button onClick={handleBackHome}>
         <i>

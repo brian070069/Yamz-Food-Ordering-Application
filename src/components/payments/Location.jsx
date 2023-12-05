@@ -20,9 +20,9 @@ const Location = ({ data }) => {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        const response = await axios.post(
+        const response = await axios.patch(
           `https://yuhmz-510557fdfff7.herokuapp.com/menu/order/${orderId}`,
-          { name: values.location },
+          { location: values.location },
           {
             headers: {
               "Content-Type": "application/json",
@@ -32,6 +32,7 @@ const Location = ({ data }) => {
         );
         console.log(response.data);
         setLoading(false);
+        handleHidePaymentArea();
       } catch (err) {
         setLoading(false);
         console.log(err);
@@ -43,11 +44,6 @@ const Location = ({ data }) => {
     <div className="readyToPay">
       <div className="readyToPay__header row">
         <h4>Enter the location for delivery </h4>
-        <button onClick={handleHidePaymentArea}>
-          <i>
-            <RxCross2 size={20} />
-          </i>
-        </button>
       </div>
       <div className="inputContainer row">
         <span>Location</span>

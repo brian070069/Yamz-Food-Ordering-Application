@@ -13,6 +13,7 @@ import ProcessingPayments from "../../components/payments/ProcessingPayments";
 import FailedPayments from "../../components/payments/FailedPayments";
 import { useRedeemPoints } from "../../hooks/useRedeemPoints";
 import { useRequireAuth } from "../../hooks/useRequireAuth";
+import Location from "../../components/payments/Location";
 
 const Cart = () => {
   useRequireAuth();

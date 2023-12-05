@@ -124,6 +124,12 @@ button:hover {
 .header__left {
   min-width: 120px;
 }
+.header__left h1 {
+  color: var(--red);
+  font-weight: 500;
+  font-size: 23px;
+  font-style: italic;
+}
 
 .header__left img {
   width: 70px;
@@ -785,6 +791,14 @@ button:hover {
   right: 0;
   top: 0;
   background-color: var(--main-bg-color);
+}
+.simpleHeader a {
+  text-decoration: none;
+}
+.simpleHeader h1 {
+  color: var(--red);
+  text-transform: capitalize;
+  font-weight: 600;
 }
 
 .simpleHeader img {
