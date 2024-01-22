@@ -41,9 +41,6 @@ const SingleUser = React.lazy(() =>
   import("./Pages/Managment/Admin/Admins/user/Index")
 );
 
-const PreMeasuredQuantities = React.lazy(() =>
-  import("./Pages/Managment/Admin/preMeasuredQuantity/PreMeasured")
-);
 const UpdateItems = React.lazy(() =>
   import("./Pages/Managment/Staff/updateItems/updateExistingFood/UpdateItems")
 );
@@ -93,11 +90,6 @@ function App() {
                 <Route index element={<AllUsers />} />
                 <Route path=":id" element={<SingleUser />} />
               </Route>
-
-              <Route
-                path="measuredquantities"
-                element={<PreMeasuredQuantities />}
-              />
             </Route>
           </Route>
 

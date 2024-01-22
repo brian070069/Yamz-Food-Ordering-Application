@@ -13,4 +13,4 @@ export const mpesaBaseUrl =
 export const profileApi =
   "https://lit-bayou-93084-8dfb177157f7.herokuapp.com/profile/";
 export const charts =
-  "https://lit-bayou-93084-8dfb177157f7.herokuapp.com/dailyrecord/";
+  "https://lit-bayou-93084-8dfb177157f7.herokuapp.com/records/";

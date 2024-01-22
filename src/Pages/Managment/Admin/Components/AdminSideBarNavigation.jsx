@@ -1,8 +1,7 @@
 import React from "react";
 import { FcSalesPerformance } from "react-icons/fc";
-import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 import { PiUsersThreeDuotone } from "react-icons/pi";
-import { TbRulerMeasure } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const AdminSideBarNavigation = ({ toggleSideBar }) => {
@@ -28,12 +27,6 @@ const AdminSideBarNavigation = ({ toggleSideBar }) => {
                   <FcSalesPerformance size={22} />
                 </span>
                 Sales Table
-              </Link>
-              <Link to={"/admin/measuredquantities"} className="adminLinks row">
-                <span className="adminLinks__icon">
-                  <TbRulerMeasure size={22} />
-                </span>
-                Measured Quantities
               </Link>
               <Link to={"/admin/users"} className="adminLinks row">
                 <span className="adminLinks__icon">

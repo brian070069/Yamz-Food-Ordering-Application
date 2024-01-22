@@ -17,7 +17,7 @@ const AllFoodTableStats = () => {
   const getPreviousRecords = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(charts);
+      const response = await axios.get(charts + "dailyrecord/");
       setIsLoading(false);
       const salesData = response.data;
       if (salesData) {

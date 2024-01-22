@@ -84,6 +84,7 @@ export const useRegisterThirdStep = () => {
       });
     } catch (error) {
       setIsLoading(false);
+      console.log(error);
       if (!error.response) {
         toast.error("failed to contact server please try again", {
           position: "top-center",
