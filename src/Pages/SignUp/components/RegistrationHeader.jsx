@@ -23,7 +23,7 @@ const RegistartionHeader = () => {
   return (
     <section className=" simpleHeader registration__header row">
       <Link to={"/"}>
-        <img src="vite.svg" alt="logo" />
+        <h1>Sansiro</h1>
       </Link>
       <div className="progress">
         <div className="progress__bar">
