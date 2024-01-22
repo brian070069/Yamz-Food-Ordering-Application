@@ -34,16 +34,17 @@ export const useLogin = () => {
       });
       const data = response.data;
       //succesful login
-      const { acess_token } = data;
+      const { access_token } = data;
       setLoading(false);
       toast.success("logged in succesfully", {
         position: "top-center",
         theme: "dark",
       });
+
+      localStorage.setItem("isAuthenticated", JSON.stringify(true));
+      localStorage.setItem("token", access_token);
       setIsAuthenticated(true);
       navigate(from, { replace: true });
-      localStorage.setItem("isAuthenticated", JSON.stringify(true));
-      localStorage.setItem("token", acess_token);
     } catch (error) {
       setLoading(false);
       if (error.request.status === 404) {
