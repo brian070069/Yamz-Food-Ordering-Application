@@ -106,7 +106,7 @@ const LastStep = () => {
     if (phoneNumber.startsWith("0")) {
       phoneNumber = "+254" + phoneNumber.slice(1);
     }
-
+    setLoading(true);
     try {
       // delete code from db
       await axios.post(userUrl + "delete_db/", {
@@ -117,6 +117,7 @@ const LastStep = () => {
       await axios.post(userUrl + "send_code/", {
         phone_number: phoneNumber,
       });
+      setLoading(false);
     } catch (err) {
       setLoading(false);
       if (err.response.status === 500) {
