@@ -21,7 +21,7 @@ const Location = ({ data }) => {
       try {
         setLoading(true);
         const response = await axios.patch(
-          `https://yuhmz-510557fdfff7.herokuapp.com/menu/order/${orderId}`,
+          `https://yuhmz-510557fdfff7.herokuapp.com/menu/order/${orderId}/`,
           { location: values.location },
           {
             headers: {

@@ -19,14 +19,16 @@ const SingleOrder = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (fetchedItems.length > 0) {
-      const itemToDisplay = fetchedItems.find((item) => {
+    if (fetchedItems?.orders?.length > 0) {
+      const itemToDisplay = fetchedItems.orders.find((item) => {
         return item.order_id === id;
       });
       console.log(itemToDisplay);
+
       setOrder(itemToDisplay);
       return;
     }
+    console.log(fetchedItems);
   }, [fetchedItems]);
 
   const updateDeliveringStatus = async (value) => {

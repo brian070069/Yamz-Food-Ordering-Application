@@ -5,6 +5,7 @@ import { RegisterContext } from "../../RegistrationContext";
 import { useNavigate } from "react-router-dom";
 import { userUrl } from "../../../../services/BaseUrls";
 import { AuthenticationContext } from "../../../../context/authContext.";
+import axios from "axios";
 
 const LastStep = () => {
   const [count, setCount] = useState(60);
@@ -19,18 +20,17 @@ const LastStep = () => {
     message: "",
   });
   const navigate = useNavigate();
-
   //register
   const handleRegister = (e) => {
     e.preventDefault();
 
     // Validate the input
-    if (verificationCode.length < 0 || verificationCode === "") {
-      setErrors(true);
-      return;
-    }
-    const verificationcodeArray = verificationCode.split("~");
-    const newVerificationCode = verificationcodeArray.join("");
+    // if (verificationCode.length < 0 || verificationCode === "") {
+    //   setErrors(true);
+    //   return;
+    // }
+    // const verificationcodeArray = verificationCode.split("~");
+    // const newVerificationCode = verificationcodeArray.join("");
 
     let phoneNumber = registrationDetails.phoneNumber;
 
@@ -44,10 +44,9 @@ const LastStep = () => {
         email: registrationDetails.email,
         first_name: registrationDetails.name,
         last_name: "qmelter",
-        verification_code: newVerificationCode,
+        verification_code: registrationDetails?.verificationCode,
         password: registrationDetails.password,
       };
-      console.log(userDetails);
 
       const register = async () => {
         setLoading(true);
@@ -110,28 +109,22 @@ const LastStep = () => {
 
     try {
       // delete code from db
-      const response = await fetch(userUrl + "delete_db/", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ phone_number: phoneNumber }),
+      await axios.post(userUrl + "delete_db/", {
+        phone_number: phoneNumber,
       });
-
-      if (!response.ok) {
-        return;
-      }
 
       // resend code
-      const response2 = await fetch(userUrl + "send_code/", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ phone_number: phoneNumber }),
+      await axios.post(userUrl + "send_code/", {
+        phone_number: phoneNumber,
       });
-
-      if (!response2.ok) {
-        return;
-      }
     } catch (err) {
       setLoading(false);
+      if (err.response.status === 500) {
+        setRegistrationDetails({
+          ...registrationDetails,
+          verificationCode: err.response.data.code,
+        });
+      }
     }
   };
 
@@ -154,7 +147,7 @@ const LastStep = () => {
   return (
     <div>
       <p className="verificationInfo">
-        We've sent a verification code to {registrationDetails.phoneNumber}
+        {/* We've sent a verification code to {registrationDetails.phoneNumber} */}
       </p>
       <form onSubmit={handleRegister}>
         <div className="input__container ">
@@ -169,7 +162,7 @@ const LastStep = () => {
           <input
             type="text"
             name="verificationCode"
-            value={verificationCode}
+            value={registrationDetails.verificationCode}
             onChange={handleChange}
             className={`verificationInput" ${errors ? "border__red" : ""}`}
           />

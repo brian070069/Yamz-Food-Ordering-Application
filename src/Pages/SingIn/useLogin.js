@@ -20,8 +20,6 @@ export const useLogin = () => {
       phoneNumber = "+254" + phoneNumber.slice(1);
     }
 
-    console.log(phoneNumber);
-
     const userInfo = {
       phone_number: phoneNumber,
       password: values.password,

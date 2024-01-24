@@ -8,6 +8,7 @@ import { useRegisterThirdStep } from "./HandleRegistratonSteps";
 
 const ThirdStep = () => {
   const { handleRegister, isLoading } = useRegisterThirdStep();
+
   const { values, handleChange, handleSubmit, touched, errors } = useFormik({
     initialValues: {
       password: "",

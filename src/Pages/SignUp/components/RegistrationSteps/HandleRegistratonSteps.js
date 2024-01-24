@@ -75,20 +75,28 @@ export const useRegisterThirdStep = () => {
         }
       );
       const data = response.data;
-      setIsLoading(false);
-      moveNextPage();
-      setRegistrationDetails({
-        ...registrationDetails,
-        password: values.password,
-        verificationCode: data.verification_code,
-      });
+      // setIsLoading(false);
+      // moveNextPage();
+      // setRegistrationDetails({
+      //   ...registrationDetails,
+      //   password: values.password,
+      //   verificationCode: data.verification_code,
+      // });
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
+
       if (!error.response) {
         toast.error("failed to contact server please try again", {
           position: "top-center",
           theme: "dark",
+        });
+      } else if (error.response.status === 500) {
+        setIsLoading(false);
+        moveNextPage();
+        setRegistrationDetails({
+          ...registrationDetails,
+          password: values.password,
+          verificationCode: error.response.data.code,
         });
       } else {
         toast.error("an error occured please try again", {

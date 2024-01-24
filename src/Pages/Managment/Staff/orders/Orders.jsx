@@ -14,8 +14,10 @@ const Orders = () => {
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const navigate = useNavigate();
 
+  console.log(fetchedItems);
+
   const navigateToOrder = (id) => {
-    if (fetchedItems.length > 0) {
+    if (fetchedItems.orders.length > 0) {
       navigate(`/staff/order/${id}`);
     }
   };
@@ -37,8 +39,8 @@ const Orders = () => {
               handleInputChange={handleInputChange}
               userPhoneNumber={userPhoneNumber}
             />
-            {fetchedItems.length > 0
-              ? fetchedItems
+            {fetchedItems?.orders?.length > 0
+              ? fetchedItems.orders
                   .sort((a, b) => {
                     if (a.state === "d") return -1;
                     if (a.state === "c") return 1;
