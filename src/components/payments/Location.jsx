@@ -21,7 +21,7 @@ const Location = ({ data }) => {
       try {
         setLoading(true);
         const response = await axios.patch(
-          `${cartBaseUrl}${orderId}/`,
+          `${cartBaseUrl}/order/${orderId}/`,
           { location: values.location },
           {
             headers: {
