@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import InLineInputError from "../InLineInputError";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
 import HandleFormBtn from "../../components/HandleFormBtn";
+import { cartBaseUrl } from "../../services/BaseUrls";
 
 const Location = ({ data }) => {
   const { handleHidePaymentArea } = data;
@@ -21,7 +21,7 @@ const Location = ({ data }) => {
       try {
         setLoading(true);
         const response = await axios.patch(
-          `https://yuhmz-510557fdfff7.herokuapp.com/menu/order/${orderId}/`,
+          `${cartBaseUrl}${orderId}/`,
           { location: values.location },
           {
             headers: {
@@ -30,7 +30,6 @@ const Location = ({ data }) => {
             },
           }
         );
-        localStorage.removeItem("orderedId");
         setLoading(false);
         handleHidePaymentArea();
       } catch (err) {
