@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { toast } from "react-toastify";
+import { Toast } from "../services/ToasterProvider";
 import { getToken } from "../libs/getToken";
 import { profileApi } from "../services/BaseUrls";
 import { useCallback, useEffect, useState } from "react";
@@ -58,17 +58,11 @@ export const useHandleProfile = (rerender) => {
           });
         } catch (err) {
           if (!err.response) {
-            toast.error("failed to contact server", {
-              position: "top-center",
-              theme: "dark",
-            });
+            Toast.error("failed to contact server");
           } else if (err.request.status === 401) {
             localStorage.clear();
           } else {
-            toast.error("an error occured please try again", {
-              position: "top-center",
-              theme: "dark",
-            });
+            Toast.error("an error occured please try again");
           }
         }
       };

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WrongCredentials from "../../components/WrongCredentials";
 import { userUrl } from "../../services/BaseUrls";
-import { toast } from "react-toastify";
+import { Toast } from "../../services/ToasterProvider";
 
 const FinishReset = ({ props }) => {
   const { userDetails } = props;
@@ -40,27 +40,18 @@ const FinishReset = ({ props }) => {
         });
         setIsLoading(false);
         setIsSuccessful(true);
-        toast.success("password reset succesfully", {
-          theme: "dark",
-          position: "top-center",
-        });
+        Toast.success("password reset succesfully");
         setTimeout(() => {
           navigate("/login", { replace: true });
         }, 2000);
       } catch (err) {
         setIsLoading(false);
         if (!err.response) {
-          toast.error("failed to contact the server", {
-            position: "top-center",
-            theme: "dark",
-          });
+          Toast.error("failed to contact the server");
         } else if (err.request.status === 400) {
           setHasWrongVerificationCode(true);
         } else {
-          toast.error("unknown error occured please try again", {
-            position: "top-center",
-            theme: "dark",
-          });
+          Toast.error("unknown error occured please try again");
         }
       }
     },

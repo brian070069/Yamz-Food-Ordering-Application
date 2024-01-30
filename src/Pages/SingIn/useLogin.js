@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { toast } from "react-toastify";
 import { AuthenticationContext } from "../../context/authContext.";
 import { useLocation, useNavigate } from "react-router-dom";
 import { userUrl } from "../../services/BaseUrls";
+import { Toast } from "../../services/ToasterProvider";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -32,15 +32,12 @@ export const useLogin = () => {
       });
       const data = response.data;
       //succesful login
-      const { access_token } = data;
+      const { acess_token } = data;
       setLoading(false);
-      toast.success("logged in succesfully", {
-        position: "top-center",
-        theme: "dark",
-      });
+      Toast.success("logged in succesfully");
 
       localStorage.setItem("isAuthenticated", JSON.stringify(true));
-      localStorage.setItem("token", access_token);
+      localStorage.setItem("token", acess_token);
       setIsAuthenticated(true);
       navigate(from, { replace: true });
     } catch (error) {
@@ -48,15 +45,9 @@ export const useLogin = () => {
       if (error.request.status === 404) {
         setWrongCredentialsError(true);
       } else if (!error.response) {
-        toast.error("failed to contact server please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("failed to contact server please try again");
       } else {
-        toast.error("an error occured please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("an error occured please try again");
       }
     }
   };

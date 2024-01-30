@@ -1,11 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import { useGetCartItems } from "../../hooks/useGetCart";
 import { useMpesaPayment } from "../../hooks/useMpesaPayment";
 
 export const HomeContext = createContext();
 
 const HomeContextProvider = ({ children }) => {
-  const { isLoadingCart } = useGetCartItems();
+  const { isLoadingCart, getCartItems, hasError } = useGetCartItems();
 
   const {
     handleMpesaPayment,
@@ -41,6 +41,8 @@ const HomeContextProvider = ({ children }) => {
         paymentErrorMessages,
         isServerErrors,
         serverErrorMessages,
+        getCartItems,
+        hasError,
       }}
     >
       {children}

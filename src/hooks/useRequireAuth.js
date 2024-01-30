@@ -3,7 +3,7 @@ import { AuthenticationContext } from "../context/authContext.";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { getToken } from "../libs/getToken";
-import { toast } from "react-toastify";
+import { Toast } from "../services/ToasterProvider";
 
 export const useRequireAuth = () => {
   const navigate = useNavigate();
@@ -40,9 +40,7 @@ export const useHasHigherResponsibility = (role) => {
     }
 
     if (token && isAuthenticated) {
-      toast.error("permission denied", {
-        theme: "dark",
-      });
+      Toast.error("permission denied");
       navigate("/", { replace: true });
       return;
     }

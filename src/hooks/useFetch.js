@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../libs/getToken";
-import { toast } from "react-toastify";
+import { Toast } from "../services/ToasterProvider";
 
 export const triggerFetch = async (Url, requireHeaders) => {
   const token = getToken("token");
@@ -19,6 +19,7 @@ export const triggerFetch = async (Url, requireHeaders) => {
 export const useFetch = (url, hasHeaders) => {
   const [fetchedItems, setFetchedItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const navigate = useNavigate();
 
   const cancelTokenSource = axios.CancelToken.source();
@@ -35,23 +36,25 @@ export const useFetch = (url, hasHeaders) => {
     try {
       setIsLoading(true);
       const data = await triggerFetch(url, hasHeaders);
-      setFetchedItems(data);
+      setHasError(false);
       setIsLoading(false);
+      setFetchedItems(data);
     } catch (error) {
       if (axios.isCancel(error)) {
         return;
       }
 
       setIsLoading(false);
+      setHasError(true);
       if (!error.response) {
-        toast.error("failed to contact server");
+        Toast.error("failed to contact server");
       } else if (error.request.status === 400) {
-        toast.error("request failed please try again");
+        Toast.error("request failed please try again");
       } else if (error.request.status === 401) {
         localStorage.clear();
         navigate("/login", { replace: true });
       } else {
-        toast.error("an error occured please try again");
+        Toast.error("an error occured please try again");
       }
     }
   };
@@ -70,5 +73,13 @@ export const useFetch = (url, hasHeaders) => {
     };
   }, []);
 
-  return { fetchedItems, isLoading, setFetchedItems };
+  return {
+    fetchedItems,
+    hasError,
+    getData,
+    setIsLoading,
+    setHasError,
+    isLoading,
+    setFetchedItems,
+  };
 };

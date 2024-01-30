@@ -2,10 +2,10 @@ import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useValidateToken } from "./hooks/useValidateToken";
 import { SkeletonTheme } from "react-loading-skeleton";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FallBack from "./components/FallBack";
 import SingleOrder from "./Pages/Managment/Staff/Order/SingleOrder";
+import { Toaster } from "sonner";
 
 //pages
 const Register = React.lazy(() => import("./Pages/SignUp/Register"));
@@ -58,7 +58,7 @@ function App() {
 
   return (
     <Suspense fallback={<FallBack />}>
-      <ToastContainer style={{ width: "fit-content" }} />
+      <Toaster richColors position="top-center" />
       <SkeletonTheme baseColor="#192433" highlightColor="#23313d">
         <Routes>
           {/* ...public routes */}

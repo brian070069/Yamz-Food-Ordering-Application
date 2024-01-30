@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const HeaderCenter = () => {
   const [state] = useContext(CartContext);
   const navigate = useNavigate();
+
   return (
     <div className="header__center row">
       <section className="row">

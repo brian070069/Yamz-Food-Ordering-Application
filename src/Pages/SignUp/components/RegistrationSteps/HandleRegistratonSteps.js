@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { userUrl } from "../../../../services/BaseUrls";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { RegisterContext } from "../../RegistrationContext";
+import { Toast } from "../../../../services/ToasterProvider";
 
 export const useRegisterFirstStep = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,17 +35,11 @@ export const useRegisterFirstStep = () => {
     } catch (error) {
       setIsLoading(false);
       if (!error.response) {
-        toast.error("failed to contact server please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("failed to contact server please try again");
       } else if (error.request.status === 400) {
         setDoesUserExist(true);
       } else {
-        toast.error("an error occured please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("an error occured please try again");
       }
     }
   };
@@ -86,10 +80,7 @@ export const useRegisterThirdStep = () => {
       setIsLoading(false);
 
       if (!error.response) {
-        toast.error("failed to contact server please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("failed to contact server please try again");
       } else if (error.response.status === 500) {
         setIsLoading(false);
         moveNextPage();
@@ -99,10 +90,7 @@ export const useRegisterThirdStep = () => {
           verificationCode: error.response.data.code,
         });
       } else {
-        toast.error("an error occured please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("an error occured please try again");
       }
     }
   };

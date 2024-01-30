@@ -8,7 +8,7 @@ import PageLink from "./PageLink";
 import { getToken } from "../../../../../libs/getToken";
 import jwtDecode from "jwt-decode";
 
-const Authenticated = () => {
+const AuthenticatedNavigation = () => {
   const [token, setDecodedToken] = useState("");
 
   useEffect(() => {
@@ -54,4 +54,4 @@ const Authenticated = () => {
   );
 };
 
-export default Authenticated;
+export default AuthenticatedNavigation;

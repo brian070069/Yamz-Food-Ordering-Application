@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { userUrl } from "../../../../services/BaseUrls";
 import { AuthenticationContext } from "../../../../context/authContext.";
 import axios from "axios";
+import { Toast } from "../../../../services/ToasterProvider";
 
 const LastStep = () => {
   const [count, setCount] = useState(60);
@@ -77,6 +78,7 @@ const LastStep = () => {
           setLoading(false);
           setIsAuthenticated(true);
           navigate("/");
+          Toast.success("Account created succesfully");
           localStorage.setItem("isAuthenticated", JSON.stringify(true));
           localStorage.setItem("token", data.access_token);
         } catch (err) {

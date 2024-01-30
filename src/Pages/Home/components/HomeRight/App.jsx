@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import HomeRightHeader from "./HomeRightHeader";
 import SingleItem from "./SingleItem";
 import PaymentButton from "./PaymentButton";
-import { useGetCartItems } from "../../../../hooks/useGetCart";
 import { CartContext } from "../../../../context/CartContext";
 
 const App = () => {

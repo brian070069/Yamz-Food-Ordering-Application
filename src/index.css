@@ -509,7 +509,26 @@ button:hover {
   font-size: 16px;
   padding-right: 6px;
 }
-
+.fetchItems__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  row-gap: 10px;
+}
+.fetchItems__error h4 {
+  color: white;
+  font-weight: 400;
+  font-size: var(--font-large);
+}
+.fetchItems__error button {
+  background-color: var(--red);
+  padding: 10px 30px;
+  border-radius: 10px;
+  color: white;
+  font-size: var(--font-normal);
+  letter-spacing: 1px;
+}
 .homeRight__container {
   background-color: var(--black-2);
   position: sticky;
@@ -3342,7 +3361,6 @@ button:hover {
   .home__body {
     display: flex;
     flex-direction: column;
-    align-items: center;
     overflow-x: hidden;
   }
 
@@ -3468,4 +3486,30 @@ button:hover {
 
 .completed {
   color: rgb(189, 26, 26);
+}
+.not__authenticated {
+  column-gap: 18px;
+  padding: 8px 0px;
+}
+.login__navigation,
+.register__navigation {
+  background-color: var(--green);
+  padding: 11px 20px;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 30px;
+  opacity: 0.9;
+}
+
+.register__navigation {
+  background-color: transparent;
+  width: fit-content;
+}
+.login__navigation:hover {
+  opacity: 1;
+}
+.register__navigation:hover {
+  background-color: rgba(255, 255, 255, 0.075);
 }
