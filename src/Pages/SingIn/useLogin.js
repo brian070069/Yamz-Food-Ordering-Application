@@ -32,12 +32,12 @@ export const useLogin = () => {
       });
       const data = response.data;
       //succesful login
-      const { access_token } = data;
+      const { acess_token } = data;
       setLoading(false);
       Toast.success("logged in succesfully");
 
       localStorage.setItem("isAuthenticated", JSON.stringify(true));
-      localStorage.setItem("token", access_token);
+      localStorage.setItem("token", acess_token);
       setIsAuthenticated(true);
       navigate(from, { replace: true });
     } catch (error) {

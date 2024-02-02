@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { addNewItemValidationSchema } from "../updateExistingFood/UpdateFoodValidation";
 import InLineInputError from "../../../../../components/InLineInputError";
-import { toast } from "react-toastify";
+
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

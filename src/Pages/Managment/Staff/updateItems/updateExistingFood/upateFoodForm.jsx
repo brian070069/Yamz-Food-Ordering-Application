@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-
 import InLineInputError from "../../../../../components/InLineInputError";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
 import { addNewItemValidationSchema } from "./UpdateFoodValidation";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { cartBaseUrl } from "../../../../../services/BaseUrls";
 import HandleFormBtn from "../../../../../components/HandleFormBtn";
 import { HiTrash } from "react-icons/hi2";
+import { Toast } from "../../../../../services/ToasterProvider";
 
 const UpdateFoodForm = ({ id }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -48,11 +47,8 @@ const UpdateFoodForm = ({ id }) => {
 
           // image type now allowed
           if (!allowedTypes.includes(selectedFile.type)) {
-            toast.error(
-              "Please select a valid image file (JPEG, PNG, GIF,SVG)",
-              {
-                position: "top-center",
-              }
+            Toast.error(
+              "Please select a valid image file (JPEG, PNG, GIF,SVG)"
             );
             return;
           }
@@ -74,21 +70,16 @@ const UpdateFoodForm = ({ id }) => {
             headers: { Authorization: `Bearer ${token}` },
           });
           setIsLoading(false);
-          toast.success("upated successfully", {
-            position: "top-center",
-          });
+          Toast.success("updated successfully");
+          navigate("/staff");
         } catch (err) {
           setIsLoading(false);
           if (!err.response) {
-            toast.error("failed to contact the server please try again", {
-              position: "top-center",
-            });
+            Toast.error("failed to contact the server please try again");
           } else if (err.request.status === 401) {
             navigate("/login", { replace: true });
           } else {
-            toast.error("An error occured while uploading please try again", {
-              position: "top-center",
-            });
+            Toast.error("An error occured while uploading please try again");
           }
         }
       },
@@ -122,13 +113,14 @@ const UpdateFoodForm = ({ id }) => {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
+
   const handleDeleteFood = async () => {
     try {
       const response = await axios.delete(cartBaseUrl + `food/${id}/`);
-      toast.success("deleted succesfully", { theme: "dark" });
+      Toast.success("Deleted succesfully");
       navigate("/staff");
     } catch (error) {
-      toast.error("an error occured please try again", { theme: "dark" });
+      Toast.error("Failed To delete,Try again");
     }
   };
 

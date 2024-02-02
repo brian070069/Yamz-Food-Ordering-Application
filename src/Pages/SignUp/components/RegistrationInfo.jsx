@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { RegisterContext } from "../RegistrationContext";
 
 const RegistrationInfo = ({ Id, info }) => {

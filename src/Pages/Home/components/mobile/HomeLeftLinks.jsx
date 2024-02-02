@@ -1,5 +1,3 @@
-// import { BsFillBasket2Fill, BsPerson } from "react-icons/bs";
-import { IoIosNotificationsOutline } from "react-icons/io";
 import { BiBowlRice } from "react-icons/bi";
 import { AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";

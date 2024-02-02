@@ -5,9 +5,7 @@ import AvailableFoodsSkeleton from "./AvailableFoodSkeleton";
 import HomeLeftLinks from "../mobile/HomeLeftLinks";
 import HomeLeftHeader from "./HomeLeftHeader";
 import FoodFilters from "./FoodFilter";
-import { triggerFetch } from "../../../../hooks/useFetch";
 import { cartBaseUrl } from "../../../../services/BaseUrls";
-import axios from "axios";
 
 const HomeLeft = () => {
   const { fetchedItems, hasError, getData, isLoading } = useFetch(

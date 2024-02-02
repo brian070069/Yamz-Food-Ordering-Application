@@ -3,7 +3,7 @@ import Order from "./Order";
 import { useGetPreviousOrders } from "./useGetPreviousOrders";
 
 const AllOrders = () => {
-  const { orders, loading, error, errorMessage } = useGetPreviousOrders();
+  const { orders, loading } = useGetPreviousOrders();
   const reversedOrders = [...orders].reverse();
 
   return (

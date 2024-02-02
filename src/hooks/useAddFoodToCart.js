@@ -3,7 +3,7 @@ import { ACTION } from "../Pages/Home/HomeReducer";
 import { CartContext } from "../context/CartContext";
 import { AuthenticationContext } from "../context/authContext.";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Toast } from "../services/ToasterProvider";
 import axios from "axios";
 import { cartBaseUrl } from "../services/BaseUrls";
 
@@ -33,10 +33,7 @@ export const useAddFoodToCart = (food_id) => {
         (foodInCart) => foodInCart.food.food_id === foodId
       );
       if (findFood) {
-        toast.error("item already in cart", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.info("Item Already in Cart");
         return;
       }
 
@@ -82,10 +79,7 @@ export const useAddFoodToCart = (food_id) => {
           payload: food,
         });
         setLoading(false);
-        toast.success("added successfully", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.success("Added successfully");
       } catch (err) {
         setLoading(false);
         if (err.request.status === 401) {
@@ -94,17 +88,11 @@ export const useAddFoodToCart = (food_id) => {
           localStorage.clear();
           dispatch({ type: ACTION.GETINITIALSTATE });
         } else if (!err.response) {
-          toast.error("failed to contact server,please try again", {
-            theme: "dark",
-          });
+          Toast.error("failed to contact server,please try again");
         } else if (err.request.status === 400) {
-          toast.error("request failed please try again", {
-            theme: "dark",
-          });
+          Toast.error("request failed please try again");
         } else {
-          toast.error("an error occured please try again", {
-            theme: "dark",
-          });
+          Toast.error("an error occured please try again");
         }
       }
     }

@@ -38,14 +38,13 @@ const FirstStep = ({ props }) => {
           const email = errorData.email[0];
 
           if (errorData && errorData.message[0]) {
-            console.log(phoneNumber);
             try {
               const sendCodeResponse = await fetch(userUrl + "send_code/", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({ phone_number: phoneNumber }),
               });
-              const data = await sendCodeResponse.json();
+
               if (!sendCodeResponse.ok) {
                 setError(true);
               } else {

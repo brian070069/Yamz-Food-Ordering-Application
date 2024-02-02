@@ -1,9 +1,9 @@
 import { useCallback, useContext } from "react";
 import { AuthenticationContext } from "../../context/authContext.";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { ACTION } from "../Home/HomeReducer";
 import { CartContext } from "../../context/CartContext";
+import { Toast } from "../../services/ToasterProvider";
 
 const SignOut = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(
@@ -17,16 +17,7 @@ const SignOut = () => {
       if (isAuthenticated) {
         dispatch({ type: ACTION.CLEARCART });
         localStorage.clear();
-        toast.success("You logged Out succesfully", {
-          position: "top-center",
-          theme: "dark",
-        });
-
-        await new Promise((resolve) =>
-          setTimeout(() => {
-            resolve();
-          }, 1000)
-        );
+        Toast.success("You logged Out succesfully");
         setIsAuthenticated(false);
         navigate("/", { replace: true });
       }

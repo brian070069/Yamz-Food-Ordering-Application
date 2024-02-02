@@ -7,9 +7,10 @@ import Header from "../../../components/Header";
 import ChangePasswordForm from "./ChangePasswordForm";
 import HandleFormBtn from "../../../components/HandleFormBtn";
 import { ChangepasswordValidation } from "./ChangePasswordValidation";
-import { toast } from "react-toastify";
+
 import { userUrl } from "../../../services/BaseUrls";
 import { useRequireAuth } from "../../../hooks/useRequireAuth";
+import { Toast } from "../../../services/ToasterProvider";
 
 const ChangePassword = () => {
   useRequireAuth();
@@ -56,7 +57,7 @@ const ChangePassword = () => {
         setLoading(false);
         setPasswordChangedSuccesfully(false);
         if (err.request.status === 401) {
-          navigate("/login");
+          navigate("/login", { replace: true });
           localStorage.clear();
           setIsAuthenticated(false);
         } else if (!err.response) {
@@ -72,21 +73,13 @@ const ChangePassword = () => {
 
   //show Message and redirect to login
   useEffect(() => {
-    let t;
     if (passwordChangeSuccesfully) {
-      t = setTimeout(() => {
-        toast.success("password change successfully", {
-          position: "top-center",
-        });
-        setLoading(false);
-        navigate("/login", { replace: true });
-        setIsAuthenticated(false);
-        localStorage.clear();
-      }, 1000);
+      Toast.success("password changed successfully");
+      setLoading(false);
+      navigate("/login", { replace: true });
+      setIsAuthenticated(false);
+      localStorage.clear();
     }
-    return () => {
-      clearTimeout(t);
-    };
   }, [passwordChangeSuccesfully]);
 
   return (

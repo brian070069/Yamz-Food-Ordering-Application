@@ -6,8 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { phoneNumberValidationSchema } from "../../Pages/SignUp/RegistrationValidation";
 
 const ReadyToPay = ({ data }) => {
-  const { handleHidePaymentArea, handleMpesaPayment, handleRedeemPoints } =
-    data;
+  const { handleHidePaymentArea, handleMpesaPayment } = data;
   const token = localStorage.getItem("token");
   let decodedPhoneNumber;
   if (token) {
@@ -60,9 +59,6 @@ const ReadyToPay = ({ data }) => {
         {/* <button>cancel</button> */}
         <button type="button" onClick={handleSubmit}>
           pay
-        </button>
-        <button type="button" onClick={handleRedeemPoints}>
-          redeem pts
         </button>
       </div>
     </div>

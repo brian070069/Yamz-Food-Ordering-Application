@@ -1,7 +1,7 @@
 export const registrationInfo = [
   {
     Id: 0,
-    info: "Create your Account with Qmelter",
+    info: "Create your Account with Sansiro",
   },
   {
     Id: 1,

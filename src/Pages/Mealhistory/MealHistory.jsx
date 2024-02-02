@@ -1,6 +1,6 @@
 import React from "react";
 import AllOrders from "./Orders/AllOrders";
-import Header from "./components/Header";
+import Header from "../../components/Header";
 import { useRequireAuth } from "../../hooks/useRequireAuth";
 import HomeLeftLinks from "../Home/components/mobile/HomeLeftLinks";
 

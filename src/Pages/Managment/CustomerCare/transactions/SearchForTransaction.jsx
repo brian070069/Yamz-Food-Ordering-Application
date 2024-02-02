@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { triggerFetch } from "../../../../hooks/useFetch";
 import { getToken } from "../../../../libs/getToken";
 import { mpesaBaseUrl } from "../../../../services/BaseUrls";

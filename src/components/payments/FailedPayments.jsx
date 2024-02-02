@@ -1,13 +1,8 @@
 import React from "react";
 
 const FailedPayments = ({ props }) => {
-  const {
-    handleHidePaymentArea,
-    paymentErrorMessages,
-    serverErrorMessages,
-    redeemErrorMessage,
-    handleHideRedeemArea,
-  } = props;
+  const { handleHidePaymentArea, paymentErrorMessages, serverErrorMessages } =
+    props;
 
   return (
     <div className="readyToPay">
@@ -15,8 +10,6 @@ const FailedPayments = ({ props }) => {
         <h4>
           {paymentErrorMessages
             ? paymentErrorMessages
-            : redeemErrorMessage
-            ? redeemErrorMessage
             : serverErrorMessages
             ? serverErrorMessages
             : ""}
@@ -24,7 +17,6 @@ const FailedPayments = ({ props }) => {
         <button
           type="button"
           onClick={() => {
-            handleHideRedeemArea();
             handleHidePaymentArea();
           }}
         >

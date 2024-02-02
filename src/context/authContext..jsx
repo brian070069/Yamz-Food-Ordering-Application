@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { useHandleProfile } from "../hooks/useHandleProfile";
-import jwtDecode from "jwt-decode";
 
 export const AuthenticationContext = createContext();
 

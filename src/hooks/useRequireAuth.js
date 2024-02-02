@@ -10,7 +10,9 @@ export const useRequireAuth = () => {
 
   useEffect(() => {
     const isAuthenticated = JSON.parse(localStorage.getItem("isAuthenticated"));
-    if (isAuthenticated) {
+    const token = localStorage.getItem("isAuthenticated");
+
+    if (isAuthenticated && token) {
       return;
     }
     navigate("/login", { replace: true });

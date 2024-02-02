@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import TableStatsHeader from "./TableStatsHeader";
 import TableSalesFilter from "./TableSalesFilter";
 import TableStatsLoader from "./TableStatsLoader";

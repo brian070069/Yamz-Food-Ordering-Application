@@ -14,8 +14,6 @@ const Orders = () => {
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const navigate = useNavigate();
 
-  console.log(fetchedItems);
-
   const navigateToOrder = (id) => {
     if (fetchedItems.orders.length > 0) {
       navigate(`/staff/order/${id}`);

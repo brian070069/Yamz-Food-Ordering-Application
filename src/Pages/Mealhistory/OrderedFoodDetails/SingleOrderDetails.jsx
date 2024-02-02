@@ -7,10 +7,8 @@ import { GoGoal } from "react-icons/go";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import OrderingStatus from "./OrderingStatus";
-import axios from "axios";
-import { cartBaseUrl } from "../../../services/BaseUrls";
 
-const SingleOrderDetails = ({ props, setOrderDetails }) => {
+const SingleOrderDetails = ({ props }) => {
   let { created_at, status, delivered_at, total, order_id, trans_id } = props;
   const [formatedDate, setFormatedDate] = useState("");
   const [formatedDeliveryDate, setFormatedDeliveryDate] = useState("");
@@ -34,20 +32,6 @@ const SingleOrderDetails = ({ props, setOrderDetails }) => {
     }
   }, [created_at, delivered_at]);
 
-  const cancelDelivery = async () => {
-    try {
-      console.log(order_id);
-      await axios.patch(
-        cartBaseUrl + `order/${"d043be9d-7e5c-411f-b6df-d6a5095059ae"}/`,
-        {
-          is_canceled: "true",
-        }
-      );
-      setOrderDetails({ ...order, status: "c" });
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <div className="order__details">
       <div className="order__detailsHeader">
@@ -90,15 +74,6 @@ const SingleOrderDetails = ({ props, setOrderDetails }) => {
           className="delivery_statusContainer row"
           style={{ justifyContent: status === "c" && "flex-end" }}
         >
-          {status === "p" && (
-            <button
-              className="canceled_deliveryBtn"
-              type="button"
-              onClick={cancelDelivery}
-            >
-              <span>cancel order</span>
-            </button>
-          )}
           {status === "p" && (
             <OrderingStatus
               icon={<PiCookingPot size={22} />}

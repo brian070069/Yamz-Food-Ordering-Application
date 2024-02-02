@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Order = ({ total, status, created_at, order_id }) => {
   //format data
   if (status === "p") {
-    status = "Active";
+    status = "preparing";
   } else if (status === "c") {
     status = "Completed";
   } else if (status === "d") {

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Avatar from "../../assets/profile.svg";
-import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
 import { profileApi } from "../../services/BaseUrls";
+import { Toast } from "../../services/ToasterProvider";
 
 const PersonalInfo = ({ data }) => {
   const {
@@ -35,10 +35,7 @@ const PersonalInfo = ({ data }) => {
     }
 
     if (!selectedFile) {
-      toast.error("please select file for upload", {
-        position: "top-center",
-        theme: "dark",
-      });
+      Toast.error("please select file for upload");
       return;
     }
 
@@ -47,10 +44,7 @@ const PersonalInfo = ({ data }) => {
 
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
     if (!allowedTypes.includes(selectedFile.type)) {
-      toast.error("Please select a valid image file (JPEG, PNG, GIF)", {
-        position: "top-center",
-        theme: "dark",
-      });
+      Toast.error("Please select a  image of Type (JPEG, PNG, GIF)");
       return;
     }
 
@@ -65,27 +59,16 @@ const PersonalInfo = ({ data }) => {
       setLoading(false);
       setSelectedFile(null);
       profilePicStatus.profileTrue();
-      toast.success("uploaded successfully", {
-        position: "top-center",
-        theme: "dark",
-      });
+      Toast.success("uploaded successfully");
       setImage(response.data.profile_pic);
     } catch (error) {
       setLoading(false);
-      console.log(error);
       if (!error.response) {
-        toast.error("failed to contact the server please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
+        Toast.error("failed to contact the server please try again");
       } else if (error.request.status === 401) {
         navigate("/login", { replace: true });
       } else {
-        toast.error("uknown error occured please try again", {
-          position: "top-center",
-          theme: "dark",
-        });
-        console.log(error);
+        Toast.error("uknown error occured please try again");
       }
     }
   };

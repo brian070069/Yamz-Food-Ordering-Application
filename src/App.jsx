@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useValidateToken } from "./hooks/useValidateToken";
 import { SkeletonTheme } from "react-loading-skeleton";
-import "react-toastify/dist/ReactToastify.css";
 import FallBack from "./components/FallBack";
 import SingleOrder from "./Pages/Managment/Staff/Order/SingleOrder";
 import { Toaster } from "sonner";
@@ -52,6 +51,7 @@ const UpdateOneItem = React.lazy(() =>
 const Transactions = React.lazy(() =>
   import("./Pages/Managment/CustomerCare/transactions/Transactions")
 );
+import "mapbox-gl/dist/mapbox-gl.css";
 
 function App() {
   useValidateToken();
@@ -59,6 +59,7 @@ function App() {
   return (
     <Suspense fallback={<FallBack />}>
       <Toaster richColors position="top-center" />
+
       <SkeletonTheme baseColor="#192433" highlightColor="#23313d">
         <Routes>
           {/* ...public routes */}

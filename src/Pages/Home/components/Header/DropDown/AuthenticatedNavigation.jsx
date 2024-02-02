@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BiBowlRice, BiCart } from "react-icons/bi";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import PageLink from "./PageLink";
-import { getToken } from "../../../../../libs/getToken";
-import jwtDecode from "jwt-decode";
 
 const AuthenticatedNavigation = () => {
-  const [token, setDecodedToken] = useState("");
-
-  useEffect(() => {
-    const token = getToken("token");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      setDecodedToken(decodedToken);
-    }
-  }, []);
-
   return (
     <nav>
       <div className="authenticated">

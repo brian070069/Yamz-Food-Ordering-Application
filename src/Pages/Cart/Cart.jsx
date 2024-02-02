@@ -11,24 +11,15 @@ import ReadyToPay from "../../components/payments/ReadyToPay";
 import SuccessfulPayments from "../../components/payments/SuccesfulPayments";
 import ProcessingPayments from "../../components/payments/ProcessingPayments";
 import FailedPayments from "../../components/payments/FailedPayments";
-import { useRedeemPoints } from "../../hooks/useRedeemPoints";
 import { useRequireAuth } from "../../hooks/useRequireAuth";
 import Location from "../../components/payments/Location";
+import HomeLeftLinks from "../Home/components/mobile/HomeLeftLinks";
 
 const Cart = () => {
   useRequireAuth();
   const [state] = useContext(CartContext);
   useGetCartItems();
 
-  const {
-    redeemPoints,
-    isRedeemingPoints,
-    showRedeemingPhoneNumberArea,
-    redeemedSuccesfully,
-    failedToRedeem,
-    redeemErrorMessage,
-    handleHideRedeemArea,
-  } = useRedeemPoints();
   const {
     handleMpesaPayment,
     handleShowLocationArea,
@@ -54,6 +45,7 @@ const Cart = () => {
           <div className="bigCart__emptyImageContainer">
             <img src={emptyCart} alt="img" />
           </div>
+          <HomeLeftLinks />
         </div>
       ) : (
         <div className="big_cart">
@@ -61,6 +53,7 @@ const Cart = () => {
             <CartHeader />
             <AllCartItems />
           </div>
+
           <BigCartPayments props={{ handleDispalyPaymentArea }} />
         </div>
       )}
@@ -70,13 +63,12 @@ const Cart = () => {
         {showPaymentArea && (
           <div className="payments row">
             <div className="paymentContainer">
-              {showPhoneNumber && showRedeemingPhoneNumberArea && (
+              {showPhoneNumber && (
                 <ReadyToPay
                   data={{
                     handleHidePaymentArea,
                     handleDispalyPaymentArea,
                     handleMpesaPayment,
-                    handleRedeemPoints: redeemPoints,
                   }}
                 />
               )}
@@ -85,7 +77,6 @@ const Cart = () => {
                   data={{
                     handleDispalyPaymentArea,
                     handleHidePaymentArea,
-                    handleRedeemPoints: redeemPoints,
                   }}
                 />
               )}
@@ -96,9 +87,6 @@ const Cart = () => {
                   message={"processing your payments"}
                 />
               )}
-              {isRedeemingPoints && (
-                <ProcessingPayments redeeming message={"redeeming..."} />
-              )}
 
               {/* payment successful */}
               {isPaymentSucessful && (
@@ -106,16 +94,6 @@ const Cart = () => {
                   props={{
                     message: "payment completed succesfully",
                     handleShowLocationArea,
-                    handleHideRedeemArea,
-                  }}
-                />
-              )}
-              {redeemedSuccesfully && (
-                <SuccessfulPayments
-                  props={{
-                    message: "redeemed succesfully",
-                    handleHidePaymentArea,
-                    handleHideRedeemArea,
                   }}
                 />
               )}
@@ -126,18 +104,7 @@ const Cart = () => {
                   props={{
                     handleHidePaymentArea,
                     paymentErrorMessages,
-                    redeemErrorMessage,
                     serverErrorMessages,
-                    handleHideRedeemArea,
-                  }}
-                />
-              )}
-              {failedToRedeem && (
-                <FailedPayments
-                  props={{
-                    handleHidePaymentArea,
-                    redeemErrorMessage,
-                    handleHideRedeemArea,
                   }}
                 />
               )}

@@ -10,7 +10,7 @@ const Login = () => {
       <div className="auth__info">
         <h3>Welcome back</h3>
         <p>
-          New to Qmelter?
+          New to Sansiro?
           <span>
             <Link to="/register">Sign up</Link>
           </span>

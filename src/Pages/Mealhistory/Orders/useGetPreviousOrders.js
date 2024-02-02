@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { OrderContext } from "../../../context/OrderContext";
 import axios from "axios";
 import { cartBaseUrl } from "../../../services/BaseUrls";
@@ -10,7 +9,6 @@ export const useGetPreviousOrders = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const cancelTokenSource = axios.CancelToken.source();
@@ -35,7 +33,6 @@ export const useGetPreviousOrders = () => {
         if (!err.response) {
           setErrorMessage("Unable to contact the server.");
         } else if (err.request.status === 401) {
-          // navigate("/login", { replace: true });
           setOrders([]);
         } else if (err.request.status === 404) {
           setError(false);
