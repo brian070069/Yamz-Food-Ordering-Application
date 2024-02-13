@@ -18,7 +18,7 @@ const HomeLeft = () => {
       <HomeLeftHeader />
       <FoodFilters />
       {isLoading ? (
-        <AvailableFoodsSkeleton />
+        <AvailableFoodsSkeleton cards={20} />
       ) : hasError ? (
         <div className="fetchItems__error">
           <h4 className>Failed to Fetch Data</h4>
