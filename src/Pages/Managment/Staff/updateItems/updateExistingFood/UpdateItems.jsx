@@ -7,7 +7,7 @@ import ManagmentNavigation from "../../../components/ManagmentNavigation";
 import SideBar from "../../SideBar";
 
 const UpdateItems = () => {
-  // useHasHigherResponsibility("staff");
+  useHasHigherResponsibility("staff admin");
 
   return (
     <>

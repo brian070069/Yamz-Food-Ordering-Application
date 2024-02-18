@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HideShowPassword from "../../components/PasswordInput";
 import InLineInputError from "../../components/InLineInputError";
 import { useFormik } from "formik";
@@ -9,18 +9,28 @@ import { Link } from "react-router-dom";
 import { useLogin } from "./useLogin";
 
 const LoginForm = () => {
+  const [isDemoActivated,setIsDemoActivated] = useState(false)
   const { loading, handleLogin, wrongCredentialsError } = useLogin();
 
-  const { values, handleChange, handleSubmit, touched, errors } = useFormik({
+  const { values, handleChange, handleSubmit, touched, errors,setValues } = useFormik({
     initialValues: {
       phoneNumber: "",
-      password: "",
+      password:""
     },
     validationSchema: LoginValidationSchema,
     onSubmit: (value) => {
       handleLogin(value);
     },
   });
+
+  useEffect(()=>{
+    if(isDemoActivated){
+       setValues({
+        phoneNumber:"0740774613",
+        password:"qwerty"
+       })
+    }
+  },[isDemoActivated])
 
   return (
     <div className="auth__formContainer">
@@ -74,6 +84,12 @@ const LoginForm = () => {
           content="login"
           loading={loading}
         />
+        {isDemoActivated ?
+        <HandleFormBtn
+          handleForm={handleSubmit}
+          content="Try Demo"
+          loading={loading}
+        />:<button className="DemoButton" onClick={()=>setIsDemoActivated(true)} >Activate Demo</button>}
       </form>
       <span className="forgotPassword__link">
         <Link to="/forgotPassword">Forgot Password?</Link>

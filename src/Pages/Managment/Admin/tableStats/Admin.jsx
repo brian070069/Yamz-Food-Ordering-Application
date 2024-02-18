@@ -5,9 +5,10 @@ import { useHasHigherResponsibility } from "../../../../hooks/useRequireAuth";
 import SideBarButton from "../Components/SideBarButton";
 
 const Admin = () => {
-  const [isSideBarshow, setIsSideBarShow] = useState(false);
-  // useHasHigherResponsibility("admin");
+  useHasHigherResponsibility("admin");
 
+  const [isSideBarshow, setIsSideBarShow] = useState(false);
+  
   const toggleSideBar = () => {
     setIsSideBarShow((prevStatus) => !prevStatus);
   };

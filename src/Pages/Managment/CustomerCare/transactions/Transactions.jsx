@@ -4,8 +4,11 @@ import { useState } from "react";
 import { useFetch } from "../../../../hooks/useFetch";
 import SearchForTransaction from "./SearchForTransaction";
 import { mpesaBaseUrl } from "../../../../services/BaseUrls";
+import { useHasHigherResponsibility } from "../../../../hooks/useRequireAuth";
 
 const Transactions = () => {
+  useHasHigherResponsibility("admin");
+
   const [isfetchingSingleTransaction, setIsFetchingSingleTransaction] =
     useState(false);
   const [singleTransactionHasError, setSingleTransactionHasError] =
