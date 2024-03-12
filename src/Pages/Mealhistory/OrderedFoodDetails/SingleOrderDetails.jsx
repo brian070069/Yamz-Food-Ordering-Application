@@ -7,6 +7,7 @@ import { GoGoal } from "react-icons/go";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import OrderingStatus from "./OrderingStatus";
+import QrCodePassword from "../../../components/QrCodePassword";
 
 const SingleOrderDetails = ({ props }) => {
   let { created_at, status, delivered_at, total, order_id, trans_id } = props;
@@ -70,39 +71,11 @@ const SingleOrderDetails = ({ props }) => {
             </div>
           )}
         </div>
-        <div
-          className="delivery_statusContainer row"
-          style={{ justifyContent: status === "c" && "flex-end" }}
-        >
-          {status === "p" && (
-            <OrderingStatus
-              icon={<PiCookingPot size={22} />}
-              label={"preparing"}
-            />
-          )}
-          {status === "d" && (
-            <OrderingStatus
-              animation={
-                <Rings
-                  height="40"
-                  width="40"
-                  color="#4fa94d"
-                  radius="6"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  visible={true}
-                  ariaLabel="rings-loading"
-                />
-              }
-              label={"Delivering Started"}
-            />
-          )}
-          {status === "c" && (
-            <OrderingStatus icon={<GoGoal size={21} />} label={"delivered"} />
-          )}
-          {status === "f" && (
-            <OrderingStatus icon={<FcCancel size={21} />} label={"cancelled"} />
-          )}
+        <div className="flex justify-center">
+          <button className="bg-[#fed800] text-black py-1 px-4 rounded-md mb-4">
+            View QrCode
+          </button>
+          <QrCodePassword />
         </div>
       </div>
     </div>
